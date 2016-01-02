@@ -1,0 +1,40 @@
+Dan Wortmann - dwortman
+Linzuo Li	 - linzuo
+
+CS537 - Fall 2015
+Program 4
+
+a) Scalable Web Server
+
+b) Kerner Threads (xv6)
+
+	In this exercise the xv6 kernel was edited in order to support threads
+	for processes. This was done by adding two additional system calls:
+		clone()
+		join()
+	Additionally a lock mechanism was implemented using atomic exchange 
+	so thread do not encounter race conditions and deadlock.
+
+	The locks were simply made using spin wait - not the most efficient
+	but does the job. Most of the additions were made in proc.c in which
+	the routines for clone and join were added as well.
+
+	clone() was very similar to fork() such that in creates a new thread
+	just as fork creates a process. However, the key differences were in
+	how the pgdir filed was copied form the parent process, and the stack
+	was set up. This allowed us to have a differentiation between a thread
+	and a process since one shared the pgdir field.
+
+	The join() routine is also very similar to wait such that it only
+	handles threads - wait() was changed to only handle processes. The key
+	difference is that we do not freeuvm->pgdir when joining a thread. This
+	ensures we do not clear the shared space between thread prematurely.
+
+	Finally a threadlibrary.c was added to handle the additional routines
+	required by the spec. Nothing fancy was done here. The lock mechanism
+	was practically a copy of what spinlock.c did, and the clone/join calls
+	were quite straight forward. A little stack alignment checking was
+	needed since malloc has no knowledge of that, and then finally free
+	the memory.
+
+	All changes are tagged //DW-P4 for easily grepping

@@ -1,0 +1,18 @@
+Dan Wortmann
+CS537 Fall 2015
+
+For the most part I ran through the xv6 directory using grep to search
+for one of the existing system calls. Per file, I added an entry for the
+two additonal system calls where it was neccessary.
+
+Finally, noticing that the syscall(void) function is the pivot of all
+system calls made, I decided it was the best spot to increment system
+calls and successful system calls.
+
+For this I assumed that the system call is considered to be incremented 
+if it actually exists. So if the initially if statement consideres it to
+be an 'unknown sys call' I did not increment. Secondly, in order to
+determin whether the call was successful I check the return value in the
+register eax. I assumed that anything >= 0 should be considered good,
+however, the scripts failed. This led me to only consider system calls
+with return value of -1 to be unsuccessful.

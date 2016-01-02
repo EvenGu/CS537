@@ -1,0 +1,54 @@
+//
+// CS537 - P2b
+// MLFQ Scheduler
+//
+// Dan Wortmann	- dwortmann
+// Linzuo Li	- linzuo
+//
+
+Description:
+
+First of all the call to a new system call was added. Since this call
+required a parameter - unlike the previous calls - there was an extra
+nueance needed for correct functionality. The kernel needed to verify
+memory space was allocated for the system call parameter.
+
+The remainder of the project involved implementing a MLFQ scheduler
+with 4 priorities. The final priority runs in RR unless a process 
+exists in the lower priorities.
+
+The decision to use statically defined arrays was done in order to
+prevent dynamic memory allocation as much as possible. Since the xv6
+seems to like statically defined arrays in most places, I decided to
+go with a similar approach - as opposed to a doubly linked list.
+
+The scheduler was hacked up from its original implementation by checking
+each queue in the priority order. This made sure that a process of the
+lowest priority was selected at each 'tick' given the process state is
+RUNNABLE as well.
+
+Another important aspect of the scheduler was when to add/remove
+processes. At first I thought the call to fork() was an excellent location
+since this is where processes are all originally created - except init.
+However, I was getting occasional 'acquire' panic errors when I did this,
+despite a lock being set on the ptable...wasn't really sure about this.
+
+Moving the adding/remove to the scheduler() seemed to mitigate this issue.
+
+Otherwise, each time a process returns back to the scheduler via context
+switch it was its tick count incremented at that priority level.
+
+Zombie processes are removed out of queues so they do not clutter up other
+processes.
+
+Finally, creating the graphs seemed to be very abstract considering a dual
+core system. For the sake of demonstration I compiled xv6 with 'CPUS=1'
+for the sake of demonstration - works with two CPUS as well, just harder
+to interpret data. 
+
+At each CPU tick, I had a print statement that showed the current processes
+in the ptable and their state/pid, and ticks at each priority level. I also
+printed out the state of each priority queue. With this information - just
+as getpinfo() would print, I was able to make simple 'graphs' in excel by
+hand.
+

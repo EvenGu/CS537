@@ -1,0 +1,41 @@
+Dan Wortmann 	-dwortman
+Linzuo Li	-linzuo
+
+CS537 - Fall 2015
+P3
+
+This program involved manipulation of the process memory allocation of the
+stack and heap. Rather than being statically allocated, the process can
+now grow both the heap and stack dynamically as needed. 
+
+The heap grows dynamically upwards, while the stack grows downwards
+starting from the highest addressible space. If an operation will try
+to allocate the last page between the stack and the heap, the OS will
+kill the process.
+
+ code
+ heap
+  |
+  v
+
+| X | - one empty space at all times (not really necessary)
+
+  ^
+  |
+stack
+
+All testing is included in the user directory with the names specified
+as in the project spec:
+	null.c
+	null-syscall.c
+	badaddress-syscall.c
+	small-stack.c
+	stack-growth.c
+	fault.c
+	malloc.c
+	overcommit-stack.c
+	overcommit-heap.c
+
+Also, if all tests are to be ran, simply run:
+	tester.c
+	

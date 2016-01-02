@@ -1,0 +1,72 @@
+starting build
+
+**********************************************************************
+
+Test build
+build xv6 using make
+
+**********************************************************************
+Trying to clean project using make clean
+make clean
+make: *** No rule to make target `clean'.  Stop.
+Trying to build project using make
+make
+make: *** No targets specified and no makefile found.  Stop.
+
+
+test build FAILED
+ (build xv6 using make)
+ make failed (error 2)
+ required file 'xv6.img' does not exist after make
+ required file 'fs.img' does not exist after make
+
+starting getpinfo
+
+**********************************************************************
+
+Test getpinfo
+compile and run a user program with a getpinfo call
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b/getpinfo.c
+IOError: [Errno 2] No such file or directory: '/tmp/tmpa355Tj/p/user/tester.c'
+
+
+test getpinfo FAILED
+ (compile and run a user program with a getpinfo call)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpa355Tj/p/user/tester.c'
+
+starting getpinfo2
+
+**********************************************************************
+
+Test getpinfo2
+check that getpinfo returns some reasonable values
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/ta/tests/2b/getpinfo2.c
+IOError: [Errno 2] No such file or directory: '/tmp/tmpa355Tj/p/user/tester.c'
+
+
+test getpinfo2 FAILED
+ (check that getpinfo returns some reasonable values)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpa355Tj/p/user/tester.c'
+
+**********************************************************************
+Summary:
+test build FAILED
+ (build xv6 using make)
+ make failed (error 2)
+ required file 'xv6.img' does not exist after make
+ required file 'fs.img' does not exist after make
+
+test getpinfo FAILED
+ (compile and run a user program with a getpinfo call)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpa355Tj/p/user/tester.c'
+
+test getpinfo2 FAILED
+ (check that getpinfo returns some reasonable values)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpa355Tj/p/user/tester.c'
+
+Passed 0 of 3 tests.
+Overall 0 of 3

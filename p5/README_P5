@@ -1,0 +1,17 @@
+Dan Wortmann - dwortman
+Linzuo Li - linzuo
+
+CS537 P5 - File System Integrity(Checksum)
+
+The kernel was edited on the writei and readi paths such that the file
+type of T_CHECKED included a checksum when handling the file. This is 
+done by XORing the data bytes across the file and storing in the top 
+byte for future comparisons. Several changes were needed as such to
+differentiate the file types. Additionally, two functions were added to
+compute the checksum and write it to the file as we are executing writei.
+
+Finally the filestat.c file uses the fstat() system call which takes in
+a file path and output the type/size/checksum of such a file. Very minor
+changes were needed to implement this such as editing the stat.h file.
+
+Last project of the semester *insert awesome ascii fireworks*
